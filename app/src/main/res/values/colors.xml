@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_init_bg">#f8f8f8</color>
+    <color name="splash_pink">#ffF06291</color>
+    <color name="splash_purple">#ff5E6AB1</color>
+    <color name="splash_scroll_bg">#ffcccccc</color>
+    <color name="splash_purple_dark">#4e569c</color>
+    <color name="splash_scroll_content_bg">#ffffff</color>
+    <color name="text_white">#f8f8f8</color>
+    <color name="splash_green">#ff82B64A</color>
+    <color name="splash_yellow">#ffFFA000</color>
+    <color name="bg_white">#e8e8e8</color>
+    <color name="grey">#e8e8e8</color>
+    <color name="light_grey">#efefef</color>
+    <color name="grey_dark">#d5d5d5</color>
+    <color name="grey_darker">#adadad</color>
+    <color name="black_shade_2">#282828</color>
+</resources>

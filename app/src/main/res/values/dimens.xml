@@ -1,0 +1,19 @@
+<resources>
+    <dimen name="splash_ball_size">60dp</dimen>
+    <dimen name="splash_ball_size_half">30dp</dimen>
+    <dimen name="splash_scroll_status_height">20dp</dimen>
+    <dimen name="splash_header_text_size">28dp</dimen>
+    <dimen name="splash_next_button_height">48dp</dimen>
+    <dimen name="splash_next_text_size">18dp</dimen>
+    <dimen name="options_bullet_size">40dp</dimen>
+    <dimen name="options_bullet_stroke_width">2dp</dimen>
+    <dimen name="options_bullet_text_size">18dp</dimen>
+    <dimen name="options_text_size">18dp</dimen>
+    <dimen name="options_pad">20dp</dimen>
+    <dimen name="elev_options_post_animate">18dp</dimen>
+    <dimen name="toolbar_size">56dp</dimen>
+    <dimen name="elev_options_pre_animate">4dp</dimen>
+    <dimen name="toolbar_title_size">21dp</dimen>
+    <dimen name="header_height">250dp</dimen>
+    <dimen name="scroll_item_top_pad">7dp</dimen>
+</resources>
