@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
@@ -27,7 +28,7 @@ public class BounceTouchListener implements View.OnTouchListener {
     private float mDownY;
     private boolean mSwipingDown, mSwipingUp;
     private float mTranslationY;
-    private android.view.animation.Interpolator mInterpolator = new DecelerateInterpolator(3f);
+    private Interpolator mInterpolator = new DecelerateInterpolator(3f);
     private boolean swipUpEnabled = true;
     private int mActivePointerId = -99;
     private float mLastTouchX = -99;
@@ -84,6 +85,7 @@ public class BounceTouchListener implements View.OnTouchListener {
                     mLastTouchX = x;
                     mLastTouchY = y;
                     mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
+
                     if (mContent.getTranslationY() > 0) {
                         mDownY = mLastTouchY - (int) Math.pow(mContent.getTranslationY(), 10f / 8f);
                         mContent.animate().cancel();
