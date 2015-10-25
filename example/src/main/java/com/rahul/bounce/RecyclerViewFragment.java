@@ -81,8 +81,7 @@ public class RecyclerViewFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setPivotX(Utils.getScreenWidth(getActivity()));
         recyclerView.addOnScrollListener(onScrollListener);
-        bounceTouchListener = new BounceTouchListener(recyclerView);
-        bounceTouchListener.setOnTranslateListener(new BounceTouchListener.OnTranslateListener() {
+        bounceTouchListener = BounceTouchListener.create(recyclerView, new BounceTouchListener.OnTranslateListener() {
             @Override
             public void onTranslate(float translation) {
                 if (translation > 0) {

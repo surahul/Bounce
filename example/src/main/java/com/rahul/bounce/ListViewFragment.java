@@ -59,8 +59,7 @@ public class ListViewFragment extends Fragment implements AbsListView.OnScrollLi
         listView.setDivider(null);
         listView.setDividerHeight(0);
         listView.setOnScrollListener(this);
-        bounceTouchListener = new BounceTouchListener(listView);
-        bounceTouchListener.setOnTranslateListener(new BounceTouchListener.OnTranslateListener() {
+        bounceTouchListener = BounceTouchListener.create(listView, new BounceTouchListener.OnTranslateListener() {
             @Override
             public void onTranslate(float translation) {
                 if (translation > 0) {
