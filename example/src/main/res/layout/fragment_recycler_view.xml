@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/main"
-    android:background="@color/black_shade_2"
-    >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/main"
+                android:background="@color/black_shade_2"
+>
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height">
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height">
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/moon_icon"
-            android:id="@+id/sun_image_view"
-            android:layout_centerInParent="true"
-            />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/moon_icon"
+                android:id="@+id/sun_image_view"
+                android:layout_centerInParent="true"
+        />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/splash_yellow"
-        android:id="@+id/header_image_view"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/splash_yellow"
+            android:id="@+id/header_image_view"
+    >
         <ImageView
-            android:layout_width="@dimen/header_height"
-            android:layout_height="@dimen/header_height"
-            android:padding="30dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/dp_image"
-            android:layout_marginBottom="7dp"
-            android:layout_centerInParent="true"
-            />
+                android:layout_width="@dimen/header_height"
+                android:layout_height="@dimen/header_height"
+                android:padding="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dp_image"
+                android:layout_marginBottom="7dp"
+                android:layout_centerInParent="true"
+        />
     </RelativeLayout>
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:background="#aa000000"
-        android:id="@+id/header_overlay"
-        />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:background="#aa000000"
+            android:id="@+id/header_overlay"
+    />
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view"
-        />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_view"
+    />
 
 </RelativeLayout>

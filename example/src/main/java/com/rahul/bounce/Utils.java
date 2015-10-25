@@ -18,6 +18,7 @@ public class Utils {
         int width = size.x;
         return width;
     }
+
     public static int getScreenHeight(Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -27,7 +28,7 @@ public class Utils {
     }
 
     public static void setElevation(View view, float elevation) {
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             view.setElevation(elevation);
     }
 }
