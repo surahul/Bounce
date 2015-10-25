@@ -55,22 +55,7 @@ public class BounceTouchListener implements View.OnTouchListener {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
-                final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
-                final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
-                mLastTouchX = x;
-                mLastTouchY = y;
-                mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
-
-                if (mContent.getTranslationY() > 0) {
-                    mDownY = mLastTouchY - (int) Math.pow(mContent.getTranslationY(), 10f / 8f);
-                    mContent.animate().cancel();
-                } else if (mContent.getTranslationY() < 0) {
-                    mDownY = mLastTouchY + (int) Math.pow(-mContent.getTranslationY(), 10f / 8f);
-                    mContent.animate().cancel();
-                } else {
-                    mDownY = mLastTouchY;
-                }
+                onDownMotionEvent(motionEvent);
                 view.onTouchEvent(motionEvent);
                 downCalled = true;
                 if (mContent.getTranslationY() == 0) {
@@ -79,22 +64,7 @@ public class BounceTouchListener implements View.OnTouchListener {
             }
             case MotionEvent.ACTION_MOVE: {
                 if (mActivePointerId == -99) {
-                    final int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
-                    final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
-                    final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
-                    mLastTouchX = x;
-                    mLastTouchY = y;
-                    mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
-
-                    if (mContent.getTranslationY() > 0) {
-                        mDownY = mLastTouchY - (int) Math.pow(mContent.getTranslationY(), 10f / 8f);
-                        mContent.animate().cancel();
-                    } else if (mContent.getTranslationY() < 0) {
-                        mDownY = mLastTouchY + (int) Math.pow(-mContent.getTranslationY(), 10f / 8f);
-                        mContent.animate().cancel();
-                    } else {
-                        mDownY = mLastTouchY;
-                    }
+                    onDownMotionEvent(motionEvent);
                     downCalled = true;
                 }
                 final int pointerIndex =
@@ -114,20 +84,12 @@ public class BounceTouchListener implements View.OnTouchListener {
                 float deltaY = y - mDownY;
                 if (Math.abs(deltaY) > 0 && hasHitTop() && deltaY > 0) {
                     mSwipingDown = true;
-                    ((ViewGroup) view).requestDisallowInterceptTouchEvent(true);
-                    MotionEvent cancelEvent = MotionEvent.obtain(motionEvent);
-                    cancelEvent.setAction(MotionEvent.ACTION_CANCEL |
-                            (MotionEventCompat.getActionIndex(motionEvent) << MotionEventCompat.ACTION_POINTER_INDEX_SHIFT));
-                    view.onTouchEvent(cancelEvent);
+                    sendCancelEventToView(view, motionEvent);
                 }
                 if (swipUpEnabled) {
                     if (Math.abs(deltaY) > 0 && hasHitBottom() && deltaY < 0) {
                         mSwipingUp = true;
-                        ((ViewGroup) view).requestDisallowInterceptTouchEvent(true);
-                        MotionEvent cancelEvent = MotionEvent.obtain(motionEvent);
-                        cancelEvent.setAction(MotionEvent.ACTION_CANCEL |
-                                (MotionEventCompat.getActionIndex(motionEvent) << MotionEventCompat.ACTION_POINTER_INDEX_SHIFT));
-                        view.onTouchEvent(cancelEvent);
+                        sendCancelEventToView(view, motionEvent);
                     }
                 }
                 if (mSwipingDown || mSwipingUp) {
@@ -218,6 +180,33 @@ public class BounceTouchListener implements View.OnTouchListener {
             }
         }
         return false;
+    }
+
+    private void sendCancelEventToView(View view, MotionEvent motionEvent) {
+        ((ViewGroup) view).requestDisallowInterceptTouchEvent(true);
+        MotionEvent cancelEvent = MotionEvent.obtain(motionEvent);
+        cancelEvent.setAction(MotionEvent.ACTION_CANCEL |
+                (MotionEventCompat.getActionIndex(motionEvent) << MotionEventCompat.ACTION_POINTER_INDEX_SHIFT));
+        view.onTouchEvent(cancelEvent);
+    }
+
+    private void onDownMotionEvent(MotionEvent motionEvent) {
+        final int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
+        final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
+        final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
+        mLastTouchX = x;
+        mLastTouchY = y;
+        mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
+
+        if (mContent.getTranslationY() > 0) {
+            mDownY = mLastTouchY - (int) Math.pow(mContent.getTranslationY(), 10f / 8f);
+            mContent.animate().cancel();
+        } else if (mContent.getTranslationY() < 0) {
+            mDownY = mLastTouchY + (int) Math.pow(-mContent.getTranslationY(), 10f / 8f);
+            mContent.animate().cancel();
+        } else {
+            mDownY = mLastTouchY;
+        }
     }
 
     private boolean hasHitBottom() {
