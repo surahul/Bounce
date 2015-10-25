@@ -66,7 +66,6 @@ public class BounceTouchListener implements View.OnTouchListener {
                 }
                 final int pointerIndex =
                         MotionEventCompat.findPointerIndex(motionEvent, mActivePointerId);
-                final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
                 final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
 
                 if (!hasHitTop() && !hasHitBottom() || !downCalled) {
@@ -185,9 +184,7 @@ public class BounceTouchListener implements View.OnTouchListener {
 
     private void onDownMotionEvent(MotionEvent motionEvent) {
         final int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
-        final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
-        final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
-        mLastTouchY = y;
+        mLastTouchY = MotionEventCompat.getY(motionEvent, pointerIndex);
         mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
 
         if (mContent.getTranslationY() > 0) {
