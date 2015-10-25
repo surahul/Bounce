@@ -17,15 +17,15 @@ import android.widget.ScrollView;
 
 
 public class BounceTouchListener implements View.OnTouchListener {
-    private static final int DEFAULT_ANIMATION_TIME = 600;
+    private static final long DEFAULT_ANIMATION_TIME = 600L;
 
     private boolean downCalled = false;
     private OnTranslateListener onTranslateListener;
     private View mMainView;
     private View mContent;
-    private long mAnimationTime = DEFAULT_ANIMATION_TIME;
     private float mDownY;
-    private boolean mSwipingDown, mSwipingUp;
+    private boolean mSwipingDown;
+    private boolean mSwipingUp;
     private Interpolator mInterpolator = new DecelerateInterpolator(3f);
     private boolean swipUpEnabled = true;
     private int mActivePointerId = -99;
@@ -124,7 +124,7 @@ public class BounceTouchListener implements View.OnTouchListener {
                 mContent.animate()
                         .setInterpolator(mInterpolator)
                         .translationY(0)
-                        .setDuration(mAnimationTime)
+                        .setDuration(DEFAULT_ANIMATION_TIME)
                         .setListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationStart(Animator animation) {
