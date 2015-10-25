@@ -26,11 +26,9 @@ public class BounceTouchListener implements View.OnTouchListener {
     private long mAnimationTime = DEFAULT_ANIMATION_TIME;
     private float mDownY;
     private boolean mSwipingDown, mSwipingUp;
-    private float mTranslationY;
     private Interpolator mInterpolator = new DecelerateInterpolator(3f);
     private boolean swipUpEnabled = true;
     private int mActivePointerId = -99;
-    private float mLastTouchX = -99;
     private float mLastTouchY = -99;
     private int mMaxAbsTranslation = -99;
 
@@ -92,9 +90,7 @@ public class BounceTouchListener implements View.OnTouchListener {
                     }
                 }
                 if (mSwipingDown || mSwipingUp) {
-                    mTranslationY = deltaY;
                     if ((deltaY <= 0 && mSwipingDown) || (deltaY >= 0 && mSwipingUp)) {
-                        mTranslationY = 0;
                         mDownY = 0;
                         mSwipingDown = false;
                         mSwipingUp = false;
@@ -144,7 +140,6 @@ public class BounceTouchListener implements View.OnTouchListener {
                             }
                         });
 
-                mTranslationY = 0;
                 mDownY = 0;
                 mSwipingDown = false;
                 mSwipingUp = false;
@@ -163,7 +158,6 @@ public class BounceTouchListener implements View.OnTouchListener {
 
                 if (pointerId == mActivePointerId) {
                     final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-                    mLastTouchX = MotionEventCompat.getX(motionEvent, newPointerIndex);
                     mLastTouchY = MotionEventCompat.getY(motionEvent, newPointerIndex);
                     mActivePointerId = MotionEventCompat.getPointerId(motionEvent, newPointerIndex);
 
@@ -193,7 +187,6 @@ public class BounceTouchListener implements View.OnTouchListener {
         final int pointerIndex = MotionEventCompat.getActionIndex(motionEvent);
         final float x = MotionEventCompat.getX(motionEvent, pointerIndex);
         final float y = MotionEventCompat.getY(motionEvent, pointerIndex);
-        mLastTouchX = x;
         mLastTouchY = y;
         mActivePointerId = MotionEventCompat.getPointerId(motionEvent, 0);
 
