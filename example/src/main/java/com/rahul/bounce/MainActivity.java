@@ -18,8 +18,6 @@ import android.widget.TextView;
 import com.rahul.bounce.library.BounceTouchListener;
 
 public class MainActivity extends AppCompatActivity {
-
-
     private static final int STATE_INITIAL_ANIMATING = 0;
     private static final int STATE_INITIAL_ANIMATED = 1;
     private static final int STATE_OPTIONS_APPEAR_ANIMATING = 2;
@@ -27,27 +25,23 @@ public class MainActivity extends AppCompatActivity {
     private static final int STATE_EXAMPLE_APPEAR_ANIMATING = 4;
     private static final int STATE_EXAMPLE_APPEAR_ANIMATED = 5;
 
-
-    View ball;
-    ScrollView scrollView;
-    View scrollHouse;
-    View mainBg;
-    View header;
-    View splashNextBg;
-    View splashNext;
-    View optionsBg;
-    View optionsBullet1, optionsBullet2, optionsBullet3;
-    View options1, options2, options3;
-    View optionsHouse;
-    View toolbar;
-    View logoBall;
-    Fragment exampleFragment;
-    AnimatorSet finalAnimator;
-
+    private View ball;
+    private ScrollView scrollView;
+    private View scrollHouse;
+    private View mainBg;
+    private View header;
+    private View splashNextBg;
+    private View splashNext;
+    private View optionsBg;
+    private View optionsBullet1, optionsBullet2, optionsBullet3;
+    private View options1, options2, options3;
+    private View optionsHouse;
+    private View toolbar;
+    private Fragment exampleFragment;
+    private AnimatorSet finalAnimator;
 
     private Interpolator initAnimationInterpolator = PathInterpolatorCompat.create(.8f, 0, .2f, 1);
     private Interpolator midAnimationInterpolator = PathInterpolatorCompat.create(.01f, 0, .025f, 1);
-
 
     private int state = STATE_INITIAL_ANIMATING;
 
@@ -81,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         header.setLayoutParams(header.getLayoutParams());
         splashNext = findViewById(R.id.splash_next);
         splashNextBg = findViewById(R.id.splash_next_bg);
-        logoBall = findViewById(R.id.logo_ball);
         splashNextBg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,22 +116,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.option_1_house).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (state == STATE_OPTIONS_APPEAR_ANIMATED)
+                if (state == STATE_OPTIONS_APPEAR_ANIMATED) {
                     toFragmentAnimation(0);
+                }
             }
         });
         findViewById(R.id.option_2_house).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (state == STATE_OPTIONS_APPEAR_ANIMATED)
+                if (state == STATE_OPTIONS_APPEAR_ANIMATED) {
                     toFragmentAnimation(1);
+                }
             }
         });
         findViewById(R.id.option_3_house).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (state == STATE_OPTIONS_APPEAR_ANIMATED)
+                if (state == STATE_OPTIONS_APPEAR_ANIMATED) {
                     toFragmentAnimation(2);
+                }
             }
         });
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
@@ -153,14 +149,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void startAnimation() {
-
         if (finalAnimator != null) {
             finalAnimator.removeAllListeners();
             finalAnimator.cancel();
         }
-
 
         ball.setTranslationY(-((Utils.getScreenHeight(this) * .5f) + getResources().getDimension(R.dimen.splash_ball_size)));
         ObjectAnimator ballFallAnimator = ObjectAnimator.ofFloat(ball, "translationY", 0);
@@ -211,18 +204,15 @@ public class MainActivity extends AppCompatActivity {
         ObjectAnimator ballOnDownPivotXZoom = ObjectAnimator.ofFloat(ball, "pivotX", getResources().getDimension(R.dimen.splash_ball_size_half));
         ballOnDownPivotXZoom.setDuration(300);
 
-
         AnimatorSet initSet = new AnimatorSet();
         AnimatorSet midSet = new AnimatorSet();
         AnimatorSet endSet = new AnimatorSet();
-
 
         initSet.play(ballFallAnimator).with(ballFallDownSquezeOut).before(ballOnDownSquezeOutX).before(ballOnDownSquezeOutY);
 
         midSet.play(ballFallAnimatorReverse).with(ballOnDownSquezeOutXReverse).with(ballOnDownSquezeOutYReverse);
 
         endSet.play(ballFallAnimatorZoom).with(ballOnDownSquezeOutXZoom).with(ballOnDownSquezeOutYZoom).with(ballOnDownPivotYZoom).with(ballOnDownPivotXZoom);
-
 
         AnimatorSet ballAnimationSet = new AnimatorSet();
         ballAnimationSet.play(midSet).after(initSet).before(endSet);
@@ -233,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
                 state = STATE_INITIAL_ANIMATED;
             }
         });
-
 
         mainBg.setAlpha(0);
         scrollHouse.setAlpha(0);
@@ -413,10 +402,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void optionsAppearAnimation() {
-
-
         state = STATE_OPTIONS_APPEAR_ANIMATING;
-
 
         if (finalAnimator != null) {
             finalAnimator.removeAllListeners();
