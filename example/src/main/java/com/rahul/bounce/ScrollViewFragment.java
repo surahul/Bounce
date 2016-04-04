@@ -40,21 +40,20 @@ public class ScrollViewFragment extends Fragment {
 
         header = root.findViewById(R.id.header_image_view);
         scrollView = (ScrollView) root.findViewById(R.id.scroll_view);
-        BounceTouchListener bounceTouchListener = new BounceTouchListener(scrollView, R.id.content);
-        bounceTouchListener.setOnTranslateListener(new BounceTouchListener.OnTranslateListener() {
-            @Override
-            public void onTranslate(float translation) {
-                if (translation > 0) {
-                    float scale = ((2 * translation) / header.getMeasuredHeight()) + 1;
-                    header.setScaleX(scale);
-                    header.setScaleY(scale);
+        BounceTouchListener bounceTouchListener = BounceTouchListener.create(scrollView, R.id.content,
+                new BounceTouchListener.OnTranslateListener() {
+                    @Override
+                    public void onTranslate(float translation) {
+                        if (translation > 0) {
+                            float scale = ((2 * translation) / header.getMeasuredHeight()) + 1;
+                            header.setScaleX(scale);
+                            header.setScaleY(scale);
+                        }
+                    }
                 }
-            }
-        });
-
+        );
 
         scrollView.setOnTouchListener(bounceTouchListener);
-
         return root;
     }
 

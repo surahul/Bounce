@@ -3,6 +3,8 @@ package com.rahul.bounce.library;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,18 +34,35 @@ public class BounceTouchListener implements View.OnTouchListener {
     private float mLastTouchY = -99;
     private int mMaxAbsTranslation = -99;
 
-    public BounceTouchListener(View mainScrollableView) {
-        this.mMainView = mainScrollableView;
-        this.mContent = this.mMainView;
+
+    private BounceTouchListener(View mainView, int contentResId, @Nullable OnTranslateListener listener) {
+        mMainView = mainView;
+        mContent = (contentResId == -1) ? mMainView : mMainView.findViewById(contentResId);
+        onTranslateListener = listener;
     }
 
-    public BounceTouchListener(View mainScrollableView, int contentResId) {
-        this.mMainView = mainScrollableView;
-        this.mContent = this.mMainView.findViewById(contentResId);
+    /**
+     * Creates a new BounceTouchListener
+     *
+     * @param mainScrollableView  The main view that this touch listener is attached to
+     * @param onTranslateListener To perform action on translation, can be null if not needed
+     * @return A new BounceTouchListener attached to the given scrollable view
+     */
+    public static BounceTouchListener create(View mainScrollableView, @Nullable OnTranslateListener onTranslateListener) {
+        return create(mainScrollableView, -1, onTranslateListener);
     }
 
-    public void setOnTranslateListener(OnTranslateListener onTranslateListener) {
-        this.onTranslateListener = onTranslateListener;
+    /**
+     * Creates a new BounceTouchListener
+     *
+     * @param mainView            The main view that this touch listener is attached to
+     * @param contentResId        Resource Id of the scrollable view
+     * @param onTranslateListener To perform action on translation, can be null if not needed
+     * @return A new BounceTouchListener attached to the given scrollable view
+     */
+    public static BounceTouchListener create(View mainView, @IdRes int contentResId,
+                                             @Nullable OnTranslateListener onTranslateListener) {
+        return new BounceTouchListener(mainView, contentResId, onTranslateListener);
     }
 
     @Override

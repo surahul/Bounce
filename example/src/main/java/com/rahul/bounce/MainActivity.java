@@ -89,18 +89,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BounceTouchListener bounceTouchListener = new BounceTouchListener(scrollView, R.id.splash_scroll_content);
-        bounceTouchListener.setOnTranslateListener(new BounceTouchListener.OnTranslateListener() {
-            @Override
-            public void onTranslate(float translation) {
-                if (translation > 0) {
-                    float scale = ((translation) / header.getLayoutParams().height) + 1;
-                    header.setScaleX(scale);
-                    header.setScaleY(scale);
+        BounceTouchListener bounceTouchListener = BounceTouchListener.create(scrollView, R.id.splash_scroll_content,
+                new BounceTouchListener.OnTranslateListener() {
+                    @Override
+                    public void onTranslate(float translation) {
+                        if (translation > 0) {
+                            float scale = ((translation) / header.getLayoutParams().height) + 1;
+                            header.setScaleX(scale);
+                            header.setScaleY(scale);
 
+                        }
+                    }
                 }
-            }
-        });
+        );
 
         scrollView.setOnTouchListener(bounceTouchListener);
 
