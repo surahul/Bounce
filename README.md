@@ -27,7 +27,7 @@ See [the example app code](example/src/main/java/com/rahul/bounce/) for sample c
 ## Apps that use this library
 
 If you're using this library in your app and you'd like to list it here,  
-please let me know via [email](mailto:denhelp1@gmail.com) or [pull requests](https://github.com/surahul/Bounc/pulls) or [issues](https://github.com/surahul/Bounc/issues).
+please let me know via [email](mailto:denhelp1@gmail.com) or [pull requests](https://github.com/surahul/Bounce/pulls) or [issues](https://github.com/surahul/Bounce/issues).
 
 
 ## Contributions
